@@ -1,14 +1,17 @@
 print('Capital cities of canadian provinces quiz')
+print('Only use lowercase when typing answers')
 
-play = input('Are you ready to begin?')
+play = input('Are you ready to begin? ("yes" to play)')
 
 if play != 'yes':
     print('bye')
     quit()
 
-print("Let's start - make sure all your answeres are in lower case")
+print("Let's start -- please make sure all your answeres are in lower case")
 score = 0
-answerslist = ()
+answerslist = []
+row = []
+answerKey = [['Ontario','toronto'],['Quebec','quebec city'],["Newfoundland","st john's"],['Nova Scotia','halifax'],['Yukon','whitehorse'],['Alberta','edmonton'],['Saskatchewan','regina'],['Manitoba','winnipeg'],['North West Territories','yellowknife'],['Prince Edward Island','charlottetown'],['British Columbia','victoria'], ['Nunavut','iqaluit']]
 
 answer = input("What is the capital city of the province of Ontario?")
 if answer == "toronto":
@@ -17,7 +20,7 @@ if answer == "toronto":
 
 else:
     print('Incorrect!')
-    answerslist.append('Ontario', answer, '**The correct answer is: toronto')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Quebec?")
 if answer == "quebec city":
@@ -25,7 +28,7 @@ if answer == "quebec city":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Quebec', answer, '**The correct answer is: quebec city')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Newfoundland?")
 if answer == "st john's":
@@ -33,7 +36,7 @@ if answer == "st john's":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('NEwfoundland', answer, "**The correct answer is: st john's")
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Nova Scotia?")
 if answer == "halifax":
@@ -41,7 +44,7 @@ if answer == "halifax":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Nova Scotia', answer, '**The correct answer is: halifax')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Yukon?")
 if answer == "whitehorse":
@@ -49,7 +52,7 @@ if answer == "whitehorse":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Yukon', answer, '**The correct answer is: whitehorse')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Alberta?")
 if answer == "edmonton":
@@ -57,7 +60,7 @@ if answer == "edmonton":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Alberta', answer, '**The correct answer is: edmonton')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Saskatchewan?")
 if answer == "regina":
@@ -65,7 +68,7 @@ if answer == "regina":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Saskatchewan', answer, '**The correct answer is: regina')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Manitoba?")
 if answer == "winnipeg":
@@ -73,7 +76,7 @@ if answer == "winnipeg":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Manitoba', answer, '**The correct answer is: winnipeg')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of North West Terriroties?")
 if answer == "yellowknife":
@@ -81,7 +84,7 @@ if answer == "yellowknife":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('North West Territories', answer, '**The correct answer is: yellowknife')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Print Edward Island?")
 if answer == "charlottetown":
@@ -89,7 +92,7 @@ if answer == "charlottetown":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Prince Edward Island', answer, '**The correct answer is: charlottetown')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of Nunavut?")
 if answer == "iqaluit":
@@ -97,7 +100,7 @@ if answer == "iqaluit":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('Nunavut', answer, '**The correct answer is: iqaluit')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of British Columbia?")
 if answer == "victoria":
@@ -105,7 +108,7 @@ if answer == "victoria":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('British Columbia', answer, '**The correct answer is: victoria')
+    answerslist.append(answer)
 
 answer = input("What is the capital city of the province of New Brunswick?")
 if answer == "fredericton":
@@ -113,10 +116,25 @@ if answer == "fredericton":
     score += 1
 else:
     print('Incorrect!')
-    answerslist.append('New Brunswick', answer, '**The correct answer is: Fredericton')
+    answerslist.append(answer)
 
 # Calculate Score
 percentage = score/13 * 100
 print('The game is now over. Your score is:', percentage, '%')
 
-reply = input('Would you like to see a list of your answers as well as the answer key?')
+replyList = input('Would you like to see a list of your incorrect answers? -- If yes, type "yes"')
+
+if replyList != 'yes':
+    quit()
+
+print(answerslist)
+
+# Answerkey and verification
+replyKey = input('Would you like to see the answer key? -- If yes, type "yes"')
+
+if replyKey == 'yes': 
+    if percentage > 0.6:
+        print(answerKey)
+    else:
+        print('Sorry, you need to pass by getting above 60 percent before viewing the answer key')
+
