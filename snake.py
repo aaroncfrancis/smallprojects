@@ -69,52 +69,52 @@ def gameLoop():
 
         #main controls of the game
 
-        for event in pg.event.get():
-            if event.type == pg.quit:
-                game_over  = True
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_LEFT:
-                    x1_change = -snake_block
-                    y1_change = 0
-                if event.key == pg.K_RIGHT:
-                    x1_change = snake_block
-                    y1_change = 0
-                if event.key == pg.K_UP:
-                    x1_change = 0
-                    y1_change = snake_block
-                if event.key == pg.K_DOWN:
-                    x1_change = 0
-                    y1_change = -snake_block
+            for event in pg.event.get():
+                if event.type == pg.quit:
+                    game_over  = True
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_LEFT:
+                        x1_change = -snake_block
+                        y1_change = 0
+                    if event.key == pg.K_RIGHT:
+                        x1_change = snake_block
+                        y1_change = 0
+                    if event.key == pg.K_UP:
+                        x1_change = 0
+                        y1_change = snake_block
+                    if event.key == pg.K_DOWN:
+                        x1_change = 0
+                        y1_change = -snake_block
 
-        if x1 >= dis_w or x1 < 0 or y1 >= dis_h or y1 < 0:
-            game_close = True
-            x1 += x1_change
-            y1 += y1_change
-            dis.fill(blue)
-            pg.draw.rect(dis,green,[bitx,bity,snake_block,snake_block])
-            snakeHead = []
-            snakeHead.append(x1)
-            snakeHead.append(y1)
-            snakeList.append(snakeHead)
-            if len(snakeHead) > snakeLength:
-                del snakeList[0]
-
-
-        for x in snakeList[:-1]:
-            if x == snakeHead:
+            if x1 >= dis_w or x1 < 0 or y1 >= dis_h or y1 < 0:
                 game_close = True
-        
-        snake(snake_block, snakeList)
-        yourScore(snakeLength - 1)
+                x1 += x1_change
+                y1 += y1_change
+                dis.fill(blue)
+                pg.draw.rect(dis,green,[bitx,bity,snake_block,snake_block])
+                snakeHead = []
+                snakeHead.append(x1)
+                snakeHead.append(y1)
+                snakeList.append(snakeHead)
+                if len(snakeHead) > snakeLength:
+                    del snakeList[0]
 
-        pg.display.update()
 
-        if x1 == bitx and y1 == bity:
-            bitx = round(random.randrange(0,dis_w - snake_block)/10)*10
-            bity = round(random.randrange(0,dis_h - snake_block)/10)*10
-            snakeLength += 1
-        
-        clock.tick(snake_speed)
+            for x in snakeList[:-1]:
+                if x == snakeHead:
+                    game_close = True
+            
+            snake(snake_block, snakeList)
+            yourScore(snakeLength - 1)
+
+            pg.display.update()
+
+            if x1 == bitx and y1 == bity:
+                bitx = round(random.randrange(0,dis_w - snake_block)/10)*10
+                bity = round(random.randrange(0,dis_h - snake_block)/10)*10
+                snakeLength += 1
+            
+            clock.tick(snake_speed)
 
     gameLoop()
     
