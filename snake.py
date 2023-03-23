@@ -24,4 +24,5 @@ def your_score(score):
 
 def snake(snake_block, snake_list): 
     for x in snake_list: 
-        pg.draw.rect(dis, black, [x[0],x[1], snake_block, snake_block])
+        pg.draw.rect(dis, block, [x[0],x[1], snake_block, snake_block])
+
