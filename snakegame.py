@@ -18,6 +18,7 @@ clock = pg.time.Clock()
 
 snake_block = 20
 snake_speed = 15
+score = 0
 
 font_style = pg.font.SysFont("arial",20)
 score_font = pg.font.SysFont("arial",20)
@@ -25,6 +26,10 @@ score_font = pg.font.SysFont("arial",20)
 def snake(snake_block, snake_list): 
     for x in snake_list: 
         pg.draw.rect(dis,white,[x[0],x[1], snake_block, snake_block])
+
+# def stats(score):
+#     self.rect = pygame.draw.rect(self.screen, (black), (175, 75, 200, 100), 2)
+#     pg.display.update()
 
 def gameLoop():
     game_over = False
@@ -74,7 +79,7 @@ def gameLoop():
         if len(snakeList) > snakeLength:
             del snakeList[0]
 
-        if x1 == bitx and y1 == bity:
+        if x1 == bitx and y1 == bity: #food 
             bitx = round(random.randrange(0,dis_w - snake_block)/snake_block)*snake_block
             bity = round(random.randrange(0,dis_h - snake_block)/snake_block)*snake_block
             snakeLength += 1
@@ -83,7 +88,12 @@ def gameLoop():
             if x == snakeHead:
                 game_over = True
 
+        if x1 >= dis_w or x1 < 0 or y1 >= dis_h or y1 < 0: #borders
+            game_over = True
+
         pg.display.update()
         clock.tick(snake_speed)
 
 gameLoop()
+
+
