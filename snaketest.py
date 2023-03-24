@@ -16,23 +16,15 @@ dis = pg.display.set_mode((dis_w, dis_h))
 
 clock = pg.time.Clock()
 
-snake_block = 5
-snake_speed = 5
+snake_block = 20
+snake_speed = 15
 
 font_style = pg.font.SysFont("arial",20)
 score_font = pg.font.SysFont("arial",20)
 
-def yourScore(score):
-    value = score_font.render("Your score is:" +str(score), True)
-    dis.blit(value, [0,0])
-
 def snake(snake_block, snake_list): 
     for x in snake_list: 
         pg.draw.rect(dis,white,[x[0],x[1], snake_block, snake_block])
-
-def message(msg, color):
-    mesg = font_style.render(msg, True, color)
-    dis.blit(mesg,[dis_w/6],dis_h/3)
 
 def gameLoop():
     game_over = False
@@ -47,25 +39,13 @@ def gameLoop():
     snakeList = []
     snakeLength = 1
 
-    bitx = round(random.randrange(0,dis_w - snake_block)/10) * 10
-    bity = round(random.randrange(0,dis_w - snake_block)/10) * 10
+    bitx = round(random.randrange(0,dis_w - snake_block)/snake_block)*snake_block
+    bity = round(random.randrange(0,dis_h - snake_block)/snake_block)*snake_block
 
     while not game_over:
-        # while game_close == True:
-        #     dis.fill(blue)
-        #     message("You Lost! Press 'C' to Continue or 'Q' to quit")
-        #     # yourScore(snakeLength - 1)
-        #     pg.display.update()
-
-        # for event in pg.event.get():
-        #     if event.type == pg.KEYDOWN:
-        #         if event.key == pg.K_q:
-        #             game_over = True
-        #             game_close = False
-        #         if event.key == pg.K_c:
-        #             gameLoop()
-
-        #main controls of the game
+        dis.fill(black)
+        snake(snake_block,snakeList) #calling function that draws snakeList for every x - coordinate 
+        pg.draw.rect(dis,green,[bitx,bity,snake_block,snake_block])
 
         for event in pg.event.get():
             if event.type == pg.quit:
@@ -84,13 +64,9 @@ def gameLoop():
                     x1_change = 0
                     y1_change = -snake_block
 
-        if x1 >= dis_w or x1 < 0 or y1 >= dis_h or y1 < 0:
-            game_close = True
-
         x1 += x1_change
-        y1 += y1_change
-        dis.fill(blue)
-        pg.draw.rect(dis,green,[bitx,bity,snake_block,snake_block])
+        y1 -= y1_change
+
         snakeHead = []
         snakeHead.append(x1)
         snakeHead.append(y1)
@@ -98,26 +74,16 @@ def gameLoop():
         if len(snakeList) > snakeLength:
             del snakeList[0]
 
-        for x in snakeList[:-1]:
-            if x == snakeHead:
-                game_close = True
-        
-        snake(snake_block, snakeList)
-        # yourScore(snakeLength - 1)
+        if x1 == bitx and y1 == bity:
+            bitx = round(random.randrange(0,dis_w - snake_block)/snake_block)*snake_block
+            bity = round(random.randrange(0,dis_h - snake_block)/snake_block)*snake_block
+            snakeLength += 1
 
-        # dis.fill(white)
+        for x in snakeList[:-1]: #from this to the (:) end of the list (-1)
+            if x == snakeHead:
+                game_over = True
 
         pg.display.update()
-
-        if x1 == bitx and y1 == bity:
-            bitx = round(random.randrange(0,dis_w - snake_block)/10)*10
-            bity = round(random.randrange(0,dis_h - snake_block)/10)*10
-            snakeLength += 1
-        
-        # clock.tick(snake_speed)
+        clock.tick(snake_speed)
 
 gameLoop()
-    
-
-
-
