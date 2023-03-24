@@ -24,6 +24,7 @@ font_style = pg.font.SysFont("arial",20)
 score_font = pg.font.SysFont("arial",20)
 
 def snake(snake_block, snake_list): 
+    """snake test"""
     for x in snake_list: 
         pg.draw.rect(dis,white,[x[0],x[1], snake_block, snake_block])
 
@@ -79,7 +80,8 @@ def gameLoop():
         if len(snakeList) > snakeLength:
             del snakeList[0]
 
-        if x1 == bitx and y1 == bity: #food 
+        if x1 == bitx and y1 == bity: 
+            """if snake head coordinates == bit coordinates""" 
             bitx = round(random.randrange(0,dis_w - snake_block)/snake_block)*snake_block
             bity = round(random.randrange(0,dis_h - snake_block)/snake_block)*snake_block
             snakeLength += 1
